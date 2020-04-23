@@ -1,5 +1,6 @@
 import React from "react";
 import {CellSymbols} from "../../constants";
+import PropTypes from "prop-types";
 
 const makeCellTemplate = (cellName, isVictorious, id, onCellClick) => {
   return (
@@ -34,6 +35,16 @@ const Battlefield = ({cells, turn, onCellClick}) => {
         }
       </div>
   );
+};
+
+Battlefield.propTypes = {
+  cells: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string.isRequired,
+      isVictorious: PropTypes.bool.isRequired
+    })),
+  turn: PropTypes.string.isRequired,
+  onCellClick: PropTypes.func.isRequired,
 };
 
 export default Battlefield;

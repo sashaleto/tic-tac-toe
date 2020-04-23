@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import './app.css';
@@ -69,6 +70,18 @@ const isVictoryFound = (activeCellCoords, newCells, activeCell) => {
     default:
       return false;
   }
+};
+
+App.propTypes = {
+  cells: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string.isRequired,
+      isVictorious: PropTypes.bool.isRequired
+    })),
+  turn: PropTypes.string.isRequired,
+  gameStage: PropTypes.string.isRequired,
+  onCellClick: PropTypes.func.isRequired,
+  onRestartButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
