@@ -28,6 +28,12 @@ export const toggleGameTurn = (currentTurn) => {
   }
 };
 
+/**
+ * Восстановление координат ячейки по ее номеру в массиве
+ * @param cellNumber - порядковый номер ячейки в массиве
+ * @param boardSize - размер игрового поля
+ * @returns {{x: number, y: number}} - координаты ячейки
+ */
 export const getCellCoords = (cellNumber, boardSize) => {
   return {
     x: cellNumber % boardSize,

@@ -37,7 +37,15 @@ const App = ({cells, turn, gameStage, onCellClick, onRestartButtonClick}) => {
   );
 };
 
-const isVictoryFound = (activeCellCoords, newCells, activeCell) => {
+/**
+ * Поиск выигравшей линии и изменение свойства isVictorious ячеек
+ * @param newCells - массив ячеек над которым проводятся проверки и в кототорый возможно добавится атрибут найденной линии
+ * @param activeCell - номер измененной ячейки в массиве cells
+ * @returns {boolean} - найдена ли победная линия (строка, столбец или диагональ)
+ */
+const isVictoryFound = (newCells, activeCell) => {
+  const activeCellCoords = getCellCoords(activeCell, BOARDSIZE);
+
   const filterBy = (checkCoords) => {
     return function (cell, index) {
       const cellCoords = getCellCoords(index, BOARDSIZE);
@@ -49,6 +57,7 @@ const isVictoryFound = (activeCellCoords, newCells, activeCell) => {
     return cell.symbol === newCells[activeCell].symbol;
   };
 
+  // Множественный фильтр по массиву ячеек - не самый производительный вариант, зато лаконичный и наглядный
   const currentRow = newCells.filter(filterBy((cellX, cellY) => cellY === activeCellCoords.y));
   const currentColumn = newCells.filter(filterBy((cellX) => cellX === activeCellCoords.x));
   const straightDiagonal = newCells.filter(filterBy((cellX, cellY) => cellX === cellY));
@@ -108,9 +117,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     dispatch(ActionCreator.setCells(newCells));
 
-    const activeCellCoords = getCellCoords(activeCell, BOARDSIZE);
-
-    if (isVictoryFound(activeCellCoords, newCells, activeCell)) {
+    if (isVictoryFound(newCells, activeCell)) {
       dispatch(ActionCreator.setGameStage(mapToWinStage(currentTurn)));
       dispatch(ActionCreator.setTurn(GameTurns.NOBODYS));
     } else if (newCells.filter(cell => cell.symbol !== CellSymbols.EMPTY).length === newCells.length) {
