@@ -12,12 +12,42 @@
   clip-path: inset(100%);
 }
 
-.game-screen__status-bar {
+.game-screen__status-bar,
+.game-screen__footer {
   margin: 2rem auto;
-  width: 30%;
+  width: 300px;
   text-align: center;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   line-height: 1.5;
+}
+
+.button {
+  display: block;
+  padding: 1em 2em;
+  margin: 0 auto;
+  border: none;
+  background: none;
+  background-color: #9953ca;
+  vertical-align: middle;
+  color: #fef7ff;
+  box-shadow: 0 5px 0 0 #4e226d;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.button:hover {
+  background-color: #7d45a5;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button > span {
+  vertical-align: middle;
 }
 
 .battlefield {

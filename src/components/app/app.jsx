@@ -29,6 +29,9 @@ const App = ({cells, turn, gameStage, onCellClick}) => {
     <section className="game-screen">
       <div className="game-screen__status-bar">{statusText}</div>
       <Battlefield cells={cells} turn={turn} onCellClick={onCellClick}/>
+      <div className="game-screen__footer">
+        <button className="button"><span>Restart game</span></button>
+      </div>
     </section>
   );
 };
