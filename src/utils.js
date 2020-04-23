@@ -1,5 +1,9 @@
 import {GameStages, GameTurns} from "./constants";
 
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
 export const mapToWinStage = (gameTurn) => {
   switch (gameTurn) {
     case GameTurns.CROSSES:

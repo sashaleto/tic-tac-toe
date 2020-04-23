@@ -6,7 +6,7 @@ import Battlefield from '../../components/battlefield/battlefield.jsx';
 import {BOARDSIZE, CellSymbols, GameStages, GameTurns} from "../../constants";
 import {getCellCoords, mapToWinStage, toggleGameTurn} from "../../utils";
 
-const App = ({cells, turn, gameStage, onCellClick}) => {
+const App = ({cells, turn, gameStage, onCellClick, onRestartButtonClick}) => {
   let statusText = `Let's play!`;
   switch (gameStage) {
     case GameStages.PLAYING:
@@ -30,7 +30,7 @@ const App = ({cells, turn, gameStage, onCellClick}) => {
       <div className="game-screen__status-bar">{statusText}</div>
       <Battlefield cells={cells} turn={turn} onCellClick={onCellClick}/>
       <div className="game-screen__footer">
-        <button className="button"><span>Restart game</span></button>
+        <button onClick={onRestartButtonClick} className="button"><span>Restart game</span></button>
       </div>
     </section>
   );
@@ -107,6 +107,9 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(ActionCreator.setTurn(toggleGameTurn(currentTurn)));
     }
   },
+  onRestartButtonClick() {
+    dispatch(ActionCreator.restartGame());
+  }
 });
 
 export {App};

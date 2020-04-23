@@ -1,8 +1,5 @@
 import {CellSymbols, GameTurns, GameStages} from "./constants";
-
-const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+import {extend} from "./utils";
 
 const initialState = {
   cells: Array(9).fill(null).map(() => ({symbol: CellSymbols.EMPTY, isVictorious: false})),
@@ -14,6 +11,7 @@ const ActionType = {
   SET_CELLS: `SET_CELLS`,
   SET_TURN: `SET_TURN`,
   SET_GAME_STAGE: `SET_GAME_STAGE`,
+  RESTART_GAME: `RESTART_GAME`,
 };
 
 const ActionCreator = {
@@ -28,6 +26,10 @@ const ActionCreator = {
   setGameStage: (stage) => ({
     type: ActionType.SET_GAME_STAGE,
     payload: stage,
+  }),
+  restartGame: () => ({
+    type: ActionType.RESTART_GAME,
+    payload: null,
   }),
 };
 
@@ -47,6 +49,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         gameStage: action.payload,
       });
+
+    case ActionType.RESTART_GAME:
+      return initialState;
     default:
       return state;
   }
